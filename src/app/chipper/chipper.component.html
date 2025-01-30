@@ -1,0 +1,36 @@
+<div class="container">
+  <div [formGroup]="form" class="parent">
+
+    <mat-form-field class="child">
+      <mat-label>Buildings</mat-label>
+      <mat-select formControlName="main">
+        @for (opt of mainOptions; track opt) {
+        <mat-option [value]="opt.key">{{ opt.value }}</mat-option>
+        }
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field class="child">
+      <mat-label>Room</mat-label>
+      <mat-select formControlName="sub">
+        @for (opt of subOptions; track opt) {
+        <mat-option [value]="opt.key">{{ opt.value }}</mat-option>
+        }
+      </mat-select>
+    </mat-form-field>
+
+    <div class="child">
+      <button (click)="addEvent()" mat-flat-button>Add Room</button>
+    </div>
+  </div>
+  @for (category of selectedChips; track category) {
+  <div class="parent">
+    <span class="category">{{ category.key }}</span>
+    @for (chip of category.value; track chip) {
+    <span class="child">
+      <mat-chip (click)="removeChip(category.key, chip)">{{ chip }}</mat-chip>
+    </span>
+    }
+  </div>
+  }
+</div>
